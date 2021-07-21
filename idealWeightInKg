@@ -1,0 +1,22 @@
+Function idealWeightInKg(gender As Range, heightInM As Range) As Double
+'check up to date copy of BNF for applications and to make sure constants are still the same.
+ 
+    Dim genderValue As String
+    Dim heightValue As Double
+    Dim weightFuncConstant As Double
+       
+    heightValue = Val(heightInM.Value) * 100
+    genderValue = Left(UCase(gender.Value), 1)
+   
+    'catch error
+    If heightValue < 1 Then
+        idealWeightInKg = CVErr(xlErrValue)
+    ElseIf genderValue = "M" Then
+        weightFuncConstant = 50
+    Else
+        weightFuncConstant = 45.5
+    End If
+       
+    idealWeightInKg = Round((weightFuncConstant + (0.91 * (heightValue - 152.4))), 2)
+ 
+End Function
